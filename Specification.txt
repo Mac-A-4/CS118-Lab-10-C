@@ -1,0 +1,7 @@
+/*
+
+Lab10B Specification:
+
+The purpose of this lab is to continue explorations of communications with web server and with other programs we may have access to on our systems.
+
+*/
