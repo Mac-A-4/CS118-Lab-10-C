@@ -1,15 +1,14 @@
-	.data
+	.section .rodata
 
 Radix:
 	.float 10.0
 _1:
 	.float 1.0
-Round_Sentinel:
-	.float 0.000001
+_0:
+	.float 0.0
 
 	.text
 	.global StringToFloat
-	.global FloatToString
 
 StringToFloat:
 	xorq %rcx, %rcx
@@ -48,23 +47,3 @@ stof_Skip:
 stof_For_6:
 	ret
 
-	.equ FloatToString_Initial, -4
-	.equ FloatToString_Sign, -8
-	.equ FloatToString_Exponent, -12
-	.equ FloatToString_Mantissa, -16
-
-FloatToString:
-	enter $16, $0
-	movss %xmm0, FloatToString_Initial(%rbp)
-	movl FloatToString_Initial(%rbp), %eax
-	movl %eax, %ecx
-	shrl $0x1F, %ecx
-	andl $0x1, %ecx
-	movl %ecx, FloatToString_Sign(%rbp)
-	movl %eax, %ecx
-	shrl $0x17, %ecx
-	andl $0xFF, %ecx
-	movl %ecx, FloatToString_Exponent(%rbp)
-	movl %eax, %ecx
-	andl $0x7FFFFF, %ecx
-	movl %ecx, FloatToString_Mantissa(%rbp)
