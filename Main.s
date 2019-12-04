@@ -13,8 +13,6 @@ Y2:
 	.string "Y2"
 SLOPE:
 	.string "Slope: "
-TUNGULUS:
-	.float 10.2002
 
 	.text
 	.global main
@@ -25,9 +23,11 @@ TUNGULUS:
 	.equ X2F, -20
 	.equ Y2F, -24
 	.equ Buffer, -88
+	.equ EquationBuffer, -152
+	.equ Slope, -156
 
 main:
-	enter $128, $0
+	enter $256, $0
 	movq %rdx, %rsi
 	lea QUERY_STRING, %rdi
 	call GetENV
@@ -69,6 +69,7 @@ main:
 	movss X1F(%rbp), %xmm3
 	subss %xmm3, %xmm2
 	divss %xmm2, %xmm0
+	movss %xmm0, Slope(%rbp)
 	lea Buffer(%rbp), %rdi
 	call FloatToString
 	
@@ -77,6 +78,18 @@ main:
 	call Print
 	lea Buffer(%rbp), %rdi
 	call PrintLine
+	call PrintHTMLBreak
+	
+	lea EquationBuffer(%rbp), %rdi
+	movss X1F(%rbp), %xmm0
+	movss Y1F(%rbp), %xmm1
+	movss Slope(%rbp), %xmm2
+	call Equation
+	lea EquationBuffer(%rbp), %rdi
+	call Plot
+	
+	lea PLOT_OUTPUT_FILE, %rdi
+	call PrintHTMLImage
 	
 	xorq %rax, %rax
 	leave

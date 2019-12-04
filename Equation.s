@@ -1,7 +1,7 @@
 	.section .rodata
 
 EQ1:
-	.string "(x-"
+	.string "*(x-"
 EQ2:
 	.string ")+"
 
@@ -27,7 +27,7 @@ Concatenate_While_3:
 	incq %rcx
 	jmp Concatenate_While_3
 Concatenate_While_4:
-	movb $0, (%rsi, %rcx, 1)
+	movb $0, (%rsi, %rax, 1)
 	ret
 
 	.equ X, -4
@@ -41,6 +41,7 @@ Concatenate_While_4:
 Equation:
 	enter $128, $0
 	movq %rdi, Output(%rbp)
+	movb $0, (%rdi)
 	movss %xmm0, X(%rbp)
 	movss %xmm1, Y(%rbp)
 	movss %xmm2, M(%rbp)

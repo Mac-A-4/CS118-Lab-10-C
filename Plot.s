@@ -16,13 +16,13 @@ Fifth, the PLOT\_OUTPUT\_FILE variable is the path to where the web server can f
 PROGRAM: 
 	.string "/usr/bin/gnuplot"
 COMMAND: 
-	.string "set terminal png; set output '/home/debian/CS118-Lab-10-B-Output.png'; plot [-5:5] "
+	.string "set terminal png; set output '/home/debian/CS118-Lab-10-C-Output.png'; plot [-5:5] "
 ARGUMENT:
 	.string "-e"
 ARGUMENT_ENVP:
 	.quad 0
 PLOT_OUTPUT_FILE:
-	.string "/home/CS118-Lab-10-B-Output.png"
+	.string "/home/CS118-Lab-10-C-Output.png"
 
 /*
 \vspace{5in}\clearpage
