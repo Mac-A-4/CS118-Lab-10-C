@@ -8,6 +8,8 @@ NEGATIVED:
 	.double -1.0
 NEGATIVEF:
 	.float -1.0
+ZEROF:
+	.float 0.0
 
 	.text
 	.global FloatToString
@@ -17,6 +19,12 @@ NEGATIVEF:
 	.equ Buffer, -64
 
 FloatToString:
+	comiss ZEROF, %xmm0
+	jne ftos_Start
+	movb $'0', (%rdi)
+	movb $0, 1(%rdi)
+	ret
+ftos_Start:
 	enter $64, $0
 	xorq %rax, %rax
 	cvtss2sd %xmm0, %xmm2
